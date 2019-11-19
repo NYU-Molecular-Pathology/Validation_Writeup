@@ -5,6 +5,6 @@ writeup of NYU LANGONE GENOME PACT pipeline
 
 - overview of the data analysis workflow
 
-[Description_of_the_tools](http://htmlpreview.github.io/?https://github.com/NYU-Molecular-Pathology/Validation_Writeup/blob/master/Description_of_the_tools.html)
+[Description_of_the_tools](http://htmlpreview.github.io/?https://github.com/NYU-Molecular-Pathology/Validation_Writeup/blob/master/description_of_tools.html)
 
 - details about the software packages and tools used in the analysis pipeline
