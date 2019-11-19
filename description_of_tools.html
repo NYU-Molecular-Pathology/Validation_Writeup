@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Stephen Kelly" />
+
+<meta name="date" content="2019-11-03" />
+
+<title>Detailed Description of the Bioinformatic Tools</title>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<style type="text/css">body {
+font-family: sans-serif;
+}
+pre code {
+background-color: #eee;
+border: 1px solid #999;
+display: block;
+padding: 20px;
+overflow: scroll;
+}
+
+.section-rule {
+color: lightgray;
+}
+</style>
+
+
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Detailed Description of the Bioinformatic Tools</h1>
+<h4 class="author">Stephen Kelly</h4>
+<h4 class="date">November 3, 2019</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#trimmomatic-version-0.36"><span class="toc-section-number">1</span> Trimmomatic Version 0.36</a><ul>
+<li><a href="#settings-used"><span class="toc-section-number">1.1</span> Settings Used</a></li>
+</ul></li>
+<li><a href="#bwa-version-0.7.17"><span class="toc-section-number">2</span> BWA Version: 0.7.17</a><ul>
+<li><a href="#settings-used-1"><span class="toc-section-number">2.1</span> Settings Used</a></li>
+</ul></li>
+<li><a href="#sambamba-v0.6.8"><span class="toc-section-number">3</span> Sambamba v0.6.8</a><ul>
+<li><a href="#settings-used-2"><span class="toc-section-number">3.1</span> Settings Used</a></li>
+</ul></li>
+<li><a href="#gatk-version-3.8"><span class="toc-section-number">4</span> GATK version 3.8</a><ul>
+<li><a href="#settings-used-3"><span class="toc-section-number">4.1</span> Settings Used</a><ul>
+<li><a href="#realignertargetcreator"><span class="toc-section-number">4.1.1</span> RealignerTargetCreator</a></li>
+<li><a href="#indelrealigner"><span class="toc-section-number">4.1.2</span> IndelRealigner</a></li>
+<li><a href="#baserecalibrator"><span class="toc-section-number">4.1.3</span> BaseRecalibrator</a></li>
+<li><a href="#depthofcoverage"><span class="toc-section-number">4.1.4</span> DepthOfCoverage</a></li>
+<li><a href="#mutect2"><span class="toc-section-number">4.1.5</span> MuTect2</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#lofreq-version-2.1.2"><span class="toc-section-number">5</span> LoFreq version 2.1.2</a><ul>
+<li><a href="#settings-used-4"><span class="toc-section-number">5.1</span> Settings Used</a></li>
+</ul></li>
+<li><a href="#bcftools-version-1.3"><span class="toc-section-number">6</span> bcftools version 1.3</a><ul>
+<li><a href="#settings-used-5"><span class="toc-section-number">6.1</span> Settings Used</a></li>
+</ul></li>
+<li><a href="#annovar-revision-150617"><span class="toc-section-number">7</span> ANNOVAR revision 150617</a><ul>
+<li><a href="#settings-used-6"><span class="toc-section-number">7.1</span> Settings Used</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Various software packages are used during the targeted exome sequencing and variant calling analysis used by the 580 gene panel. The bulk of these tools are scripted in the <a href="https://github.com/NYU-Molecular-Pathology/NGS580-nf"><code>NGS580-nf</code></a> pipeline (<a href="https://github.com/NYU-Molecular-Pathology/NGS580-nf" class="uri">https://github.com/NYU-Molecular-Pathology/NGS580-nf</a>).</p>
+<section id="trimmomatic-version-0.36" class="level1">
+<h1><span class="header-section-number">1</span> Trimmomatic Version 0.36</h1>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4103590/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4103590/</a></p>
+<p><a href="http://www.usadellab.org/cms/?page=trimmomatic" class="uri">http://www.usadellab.org/cms/?page=trimmomatic</a></p>
+<p>A flexible read trimming tool for Illumina NGS data. Trimmomatic performs a variety of useful trimming tasks for illumina paired-end and single ended data.</p>
+<section id="settings-used" class="level2">
+<h2><span class="header-section-number">1.1</span> Settings Used</h2>
+<ul>
+<li><p><code>PE</code>: Paired End</p></li>
+<li><p><code>ILLUMINACLIP:/ref/contaminants/trimmomatic.fa:2:30:10:1:true</code>: Cut adapter and other illumina-specific sequences from the read.</p></li>
+<li><p><code>TRAILING:5</code>: TRAILING: Cut bases off the end of a read, if below a threshold quality</p></li>
+<li><p><code>SLIDINGWINDOW:4:15</code>: Scan the read with a 4-base wide sliding window, cutting when the average quality per base drops below 15</p></li>
+<li><p><code>MINLEN:35</code>: Drop the read if it is below a specified length</p></li>
+</ul>
+</section>
+</section>
+<section id="bwa-version-0.7.17" class="level1">
+<h1><span class="header-section-number">2</span> BWA Version: 0.7.17</h1>
+<p><a href="https://github.com/lh3/bwa" class="uri">https://github.com/lh3/bwa</a></p>
+<p><a href="http://bio-bwa.sourceforge.net/bwa.shtml" class="uri">http://bio-bwa.sourceforge.net/bwa.shtml</a></p>
+<p>BWA is a software package for mapping DNA sequences against a large reference genome, such as the human genome.</p>
+<section id="settings-used-1" class="level2">
+<h2><span class="header-section-number">2.1</span> Settings Used</h2>
+<ul>
+<li><p><code>bwa mem</code>: Align 70bp-1Mbp query sequences with the BWA-MEM algorithm.</p></li>
+<li><p><code>-M</code>: Mark shorter split hits as secondary</p></li>
+<li><p><code>-v 1</code>: Control the verbose level of the output. 1 for outputting errors only</p></li>
+</ul>
+</section>
+</section>
+<section id="sambamba-v0.6.8" class="level1">
+<h1><span class="header-section-number">3</span> Sambamba v0.6.8</h1>
+<p><a href="https://github.com/lomereiter/sambamba" class="uri">https://github.com/lomereiter/sambamba</a></p>
+<p><a href="http://lomereiter.github.io/sambamba/" class="uri">http://lomereiter.github.io/sambamba/</a></p>
+<p><a href="http://lomereiter.github.io/sambamba/docs/sambamba-view.html" class="uri">http://lomereiter.github.io/sambamba/docs/sambamba-view.html</a></p>
+<p>Tools for working with SAM/BAM data.</p>
+<p>Sambamba is a high performance modern robust and fast tool (and library), written in the D programming language, for working with SAM and BAM files. Current functionality is an important subset of samtools functionality, including view, index, sort, markdup, and depth.</p>
+<section id="settings-used-2" class="level2">
+<h2><span class="header-section-number">3.1</span> Settings Used</h2>
+<ul>
+<li><code>--filter='mapping_quality&gt;=10'</code>: Set custom filter for alignments.</li>
+</ul>
+</section>
+</section>
+<section id="gatk-version-3.8" class="level1">
+<h1><span class="header-section-number">4</span> GATK version 3.8</h1>
+<p><a href="https://software.broadinstitute.org/gatk/" class="uri">https://software.broadinstitute.org/gatk/</a></p>
+<p><a href="https://software.broadinstitute.org/gatk/documentation/" class="uri">https://software.broadinstitute.org/gatk/documentation/</a></p>
+<p><a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/" class="uri">https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/</a></p>
+<p>Genome Analysis Toolkit for variant discovery in high-throughput sequencing data. Developed in the Data Sciences Platform at the Broad Institute, the toolkit offers a wide variety of tools with a primary focus on variant discovery and genotyping.</p>
+<section id="settings-used-3" class="level2">
+<h2><span class="header-section-number">4.1</span> Settings Used</h2>
+<section id="realignertargetcreator" class="level3">
+<h3><span class="header-section-number">4.1.1</span> RealignerTargetCreator</h3>
+<ul>
+<li><p><code>-dt NONE</code>: Type of read downsampling to employ at a given locus</p></li>
+<li><p><code>--interval_padding 10</code>: Amount of padding (in bp) to add to each interval</p></li>
+</ul>
+</section>
+<section id="indelrealigner" class="level3">
+<h3><span class="header-section-number">4.1.2</span> IndelRealigner</h3>
+<ul>
+<li><p><code>-dt NONE</code>: Type of read downsampling to employ at a given locus</p></li>
+<li><p><code>--maxReadsForRealignment 50000</code>: Max reads allowed at an interval for realignment</p></li>
+</ul>
+</section>
+<section id="baserecalibrator" class="level3">
+<h3><span class="header-section-number">4.1.3</span> BaseRecalibrator</h3>
+<ul>
+<li><p><code>-rf BadCigar</code>: Filters to apply to reads before analysis</p></li>
+<li><p><code>--interval_padding 10</code>: Amount of padding (in bp) to add to each interval</p></li>
+<li><p><code>-BQSR</code>: Base quality score recalibration</p></li>
+</ul>
+</section>
+<section id="depthofcoverage" class="level3">
+<h3><span class="header-section-number">4.1.4</span> DepthOfCoverage</h3>
+<ul>
+<li><p><code>-dt NONE</code>: Type of read downsampling to employ at a given locus</p></li>
+<li><p><code>-rf BadCigar</code>: Filters to apply to reads before analysis</p></li>
+<li><p><code>--omitIntervalStatistics</code>: Do not calculate per-interval statistics</p></li>
+<li><p><code>--omitLocusTable</code>: Do not calculate per-sample per-depth counts of loci</p></li>
+<li><p><code>--omitDepthOutputAtEachBase</code>: Do not output depth of coverage at each base</p></li>
+<li><p><code>-ct [10, 50, 100, 200, 300, 400, 500]</code>: Coverage threshold (in percent) for summarizing statistics</p></li>
+<li><p><code>-mbq 20</code>: Minimum quality of bases to count towards depth</p></li>
+<li><p><code>-mmq 20</code>: Minimum mapping quality of reads to count towards depth</p></li>
+</ul>
+</section>
+<section id="mutect2" class="level3">
+<h3><span class="header-section-number">4.1.5</span> MuTect2</h3>
+<ul>
+<li><p><code>-dt NONE</code>: Type of read downsampling to employ at a given locus</p></li>
+<li><p><code>--standard_min_confidence_threshold_for_calling 30</code>: The minimum phred-scaled confidence threshold at which variants should be called</p></li>
+<li><p><code>--max_alt_alleles_in_normal_count 10</code>: Threshold for maximum alternate allele counts in normal</p></li>
+<li><p><code>--max_alt_allele_in_normal_fraction 0.05</code>: Threshold for maximum alternate allele fraction in normal</p></li>
+<li><p><code>--max_alt_alleles_in_normal_qscore_sum 40</code>: Threshold for maximum alternate allele quality score sum in normal</p></li>
+<li><p><code>--interval_padding 10</code>: Amount of padding (in bp) to add to each interval</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="lofreq-version-2.1.2" class="level1">
+<h1><span class="header-section-number">5</span> LoFreq version 2.1.2</h1>
+<p><a href="http://csb5.github.io/lofreq/" class="uri">http://csb5.github.io/lofreq/</a></p>
+<p><a href="https://github.com/CSB5/lofreq" class="uri">https://github.com/CSB5/lofreq</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pubmed/23066108" class="uri">https://www.ncbi.nlm.nih.gov/pubmed/23066108</a></p>
+<p>LoFreq is a fast and sensitive variant-caller for inferring SNVs and indels from next-generation sequencing data. It makes full use of base-call qualities and other sources of errors inherent in sequencing (e.g. mapping or base/indel alignment uncertainty), which are usually ignored by other methods or only used for filtering.</p>
+<section id="settings-used-4" class="level2">
+<h2><span class="header-section-number">5.1</span> Settings Used</h2>
+<ul>
+<li><code>--call-indels</code>: include indels in variant call output</li>
+</ul>
+</section>
+</section>
+<section id="bcftools-version-1.3" class="level1">
+<h1><span class="header-section-number">6</span> bcftools version 1.3</h1>
+<p><a href="https://samtools.github.io/bcftools/" class="uri">https://samtools.github.io/bcftools/</a></p>
+<p><a href="https://samtools.github.io/bcftools/bcftools.html" class="uri">https://samtools.github.io/bcftools/bcftools.html</a></p>
+<p><a href="http://www.htslib.org/download/" class="uri">http://www.htslib.org/download/</a></p>
+<p>BCFtools is a set of utilities that manipulate variant calls in the Variant Call Format (VCF) and its binary counterpart BCF. All commands work transparently with both VCFs and BCFs, both uncompressed and BGZF-compressed.</p>
+<section id="settings-used-5" class="level2">
+<h2><span class="header-section-number">6.1</span> Settings Used</h2>
+<ul>
+<li><p><code>index</code>: index VCF/BCF</p></li>
+<li><p><code>norm</code>: normalize indels</p></li>
+<li><p><code>view</code>: subset, filter and convert VCF and BCF files</p></li>
+<li><p><code>--multiallelics</code>: split multiallelic sites into biallelic records (-) or join biallelic sites into multiallelic records (+)</p></li>
+<li><p><code>-both</code>: abbreviation of “-c indels -c snps”</p></li>
+<li><p><code>-c snps</code>: any SNP records are compatible, regardless of whether the ALT alleles match or not. For duplicate positions, only the first SNP record will be considered and appear on output.</p></li>
+<li><p><code>-c indels</code>: all indel records are compatible, regardless of whether the REF and ALT alleles match or not. For duplicate positions, only the first indel record will be considered and appear on output.</p></li>
+<li><p><code>--output-type v</code>: Output compressed BCF (b), uncompressed BCF (u), compressed VCF (z), uncompressed VCF (v). Use the -Ou option when piping between bcftools subcommands to speed up performance by removing unnecessary compression/decompression and VCF←→BCF conversion.</p></li>
+<li><p><code>--fasta-ref</code>: reference sequence in fasta format</p></li>
+</ul>
+</section>
+</section>
+<section id="annovar-revision-150617" class="level1">
+<h1><span class="header-section-number">7</span> ANNOVAR revision 150617</h1>
+<p><a href="http://annovar.openbioinformatics.org/en/latest/" class="uri">http://annovar.openbioinformatics.org/en/latest/</a></p>
+<p>ANNOVAR is an efficient software tool to utilize update-to-date information to functionally annotate genetic variants detected from diverse genomes (including human genome hg18, hg19, hg38, as well as mouse, worm, fly, yeast and many others)</p>
+<section id="settings-used-6" class="level2">
+<h2><span class="header-section-number">7.1</span> Settings Used</h2>
+<ul>
+<li><p><code>--buildver hg19</code>: genome build version</p></li>
+<li><p><code>--protocol refGene,clinvar_20170905,cosmic70,1000g2015aug_all,avsnp150,exac03,snp138</code>: comma-delimited string specifying database protocol</p></li>
+<li><p><code>--operation g,f,f,f,f,f,f</code>: comma-delimited string specifying type of operation</p></li>
+</ul>
+</section>
+</section>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+</body>
+</html>
